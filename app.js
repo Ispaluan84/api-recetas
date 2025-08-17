@@ -1,0 +1,23 @@
+const express = require('express');
+const cors = require('cors');
+const authRoutes = require('./routes/auth');
+const recipeRoutes = require('./routes/recipes');
+const notFound = require('./middlewares/notFound');
+const errorHandler = require('./middlewares/errorHandler');
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+app.use('/api/auth', authRoutes);
+app.use('/api/recipes', recipeRoutes);
+
+app.get('/', (req, res) => {
+    res.send('API de Recetas funcionando');
+});
+
+app.use(notFound);
+app.use(errorHandler);
+
+module.exports = app;
