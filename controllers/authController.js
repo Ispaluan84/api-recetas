@@ -34,7 +34,7 @@ exports.loginUser = async (req, res, next) => {
     // Verificar si el usuario existe
     const user = await User.findOne({ username });
     if (!user) {
-      return res.status(400).json({ message: 'Credenciales inválidas' });
+      return res.status(400).json({ message: 'Usuario no encontrado' });
     }
 
     // Comparar contraseñas
