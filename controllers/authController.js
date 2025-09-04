@@ -6,7 +6,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'claveultrasecreta';
 
 exports.registerUser = async (req, res, next) => {
   try {
-    const { username, password } = req.body;
+    const { username, password, role } = req.body;
 
     // Verificar si el usuario ya existe
     const userExists = await User.findOne({ username });
@@ -18,7 +18,7 @@ exports.registerUser = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Crear nuevo usuario
-    const newUser = new User({ username, password: hashedPassword });
+    const newUser = new User({ username, password: hashedPassword, role: role || "user" });
     await newUser.save();
 
     res.status(201).json({ message: 'Usuario registrado correctamente' });
