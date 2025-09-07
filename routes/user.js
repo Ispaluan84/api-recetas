@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.put("/make-admin/:id", async (req, res) => {
+router.put("/make-admin/:id", auth, isAdmin, async (req, res) => {
     try {
         const user = await User.findByIdAndUpdate(
             req.params.id,
