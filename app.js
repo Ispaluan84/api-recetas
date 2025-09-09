@@ -8,8 +8,13 @@ const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
 
+const allowedOrigins = [
+    'http://localhost:5173',
+    'https://recetas-frontend-swart.vercel.app'
+]
+
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: allowedOrigins,
     method: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
